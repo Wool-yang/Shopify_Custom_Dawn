@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header{
+    display: grid;
+    grid-template-areas: "header-logo header-menu header-icons";
+    grid-template-columns: 1fr 2fr 1fr;
+    .header__logo{
+        grid-area: header-logo;
+    }
+    .heade__menu{
+        grid-area: header-menu;
+    }
+    .header__icons{
+        grid-area: header-icons;
+    }
+
+    @media (max-width: 768px) {
+        grid-template-areas: "header-menu header-logo header-icons";
+    }
+}
