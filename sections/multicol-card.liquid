@@ -1,0 +1,169 @@
+<div class="flex flex-col justify-center items-center max-w-6xl mx-auto">
+  <div class="md:{{ section.settings.title_width }} {{ section.settings.title_width_mobile }} md:{{ section.settings.font_size }} {{ section.settings.font_size_mobile }} font-bold text-center
+  mb-{{ section.settings.margin_bottom_mobile }} mt-{{ section.settings.margin_top_mobile }} md:mb-{{ section.settings.margin_bottom }} md:mt-{{ section.settings.margin_top }}" style="color: {{ section.settings.font_color }};">
+    {{ section.settings.title }}
+  </div>
+  <div x-data="Slider(true, 4000, false)">
+    <div class="md:grid md:md:grid-cols-3 md:gap-5 flex max-[768px]:overflow-x-scroll max-[768px]:overflow-hidden snap-x snap-mandatory scrollbar-hidden" x-ref="slider">
+      {% for block in section.blocks %}
+        <div x-bind="disableNextAndPreviousButtons" class="w-full md:h-full flex justify-center items-center flex-shrink-0 snap-start">
+          <div class="max-[768px]:w-11/12 max-[768px]:h-5/6 md:w-full md:h-full md:col-span-1 break-words border border-blue-200 rounded-xl shadow-blue-600 shadow flex justify-center items-center">
+            <div class="p-5 text-lg text-center">
+              {{ block.settings.card_text }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="md:hidden text-lg flex justify-center">
+      <div class="flex justify-center">
+        <span x-text="curIndex + 1"></span>
+        <span>/</span>
+        <span x-text="numSlides"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "多列卡片",
+    "tag": "section",
+    "class": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "title",
+        "label": "标题"
+      }, {
+        "type": "color",
+        "id": "font_color",
+        "label": "字体颜色"
+      }, {
+        "type": "select",
+        "id": "font_size",
+        "label": "字体大小",
+        "default": "text-3xl",
+        "options": [
+          {
+            "value": "text-2xl",
+            "label": "小"
+          }, {
+            "value": "text-3xl",
+            "label": "中"
+          }, {
+            "value": "text-4xl",
+            "label": "大"
+          }
+        ]
+      }, {
+        "type": "select",
+        "id": "font_size_mobile",
+        "label": "移动端字体大小",
+        "default": "text-xl",
+        "options": [
+          {
+            "value": "text-lg",
+            "label": "小"
+          }, {
+            "value": "text-xl",
+            "label": "中"
+          }, {
+            "value": "text-2xl",
+            "label": "大"
+          }
+        ]
+      }, {
+        "type": "range",
+        "id": "margin_top",
+        "label": "上边距",
+        "min": 0,
+        "max": 16,
+        "default": 4
+      }, {
+        "type": "range",
+        "id": "margin_top_mobile",
+        "label": "移动端上边距",
+        "min": 0,
+        "max": 16,
+        "default": 2
+      }, {
+        "type": "range",
+        "id": "margin_bottom",
+        "label": "下边距",
+        "min": 0,
+        "max": 16,
+        "default": 4
+      }, {
+        "type": "range",
+        "id": "margin_bottom_mobile",
+        "label": "移动端下边距",
+        "min": 0,
+        "max": 16,
+        "default": 2
+      }, {
+        "type": "select",
+        "id": "title_width",
+        "label": "桌面端标题最大宽度",
+        "default": "max-w-5xl",
+        "options": [
+          {
+            "value": "max-w-4xl",
+            "label": "max-w-4xl"
+          }, {
+            "value": "max-w-5xl",
+            "label": "max-w-5xl"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "title_width_mobile",
+        "label": "移动端标题宽度",
+        "default": "w-4/5",
+        "options": [
+          {
+            "value": "w-3/4",
+            "label": "75"
+          }, {
+            "value": "w-4/5",
+            "label": "80%"
+          }, {
+            "value": "w-11/12",
+            "label": "91.6%"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "卡片",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "card_text",
+            "label": "卡片文本"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "多列卡片",
+        "blocks": [
+          {
+            "type": "card"
+          }, {
+            "type": "card"
+          }, {
+            "type": "card"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

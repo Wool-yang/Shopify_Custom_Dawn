@@ -1,0 +1,287 @@
+<div style="background-color: {{ section.settings.bg_color }};">
+  <div class="flex justify-center max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 my-6 gap-7 w-full">
+      <div class="col-span-1 flex-col justify-center items-center max-[768px]:w-11/12 max-[768px]:mx-auto" x-data="Slider(false, 0, true)">
+        <div class="border rounded-xl overflow-hidden relative">
+          <div
+            class="flex overflow-x-scroll overflow-hidden snap-x snap-mandatory scrollbar-hidden"
+            x-ref="slider"
+            @keydown.right="next"
+            @keydown.left="prev"
+            tabindex="0">
+            {% for media in section.settings.product.media %}
+              <div x-bind="disableNextAndPreviousButtons" class="w-full flex-shrink-0 snap-start">
+                {% render 'media', media: media %}
+              </div>
+            {% endfor %}
+            <button
+              @click="prev"
+              :aria-disabled="atBeginning"
+              :tabindex="atBeginning ? -1 : 0"
+              :class="!atBeginning ? 'opacity-50' : 'opacity-0 cursor-not-allowed'"
+              class="h-full absolute top-1/2 transform -translate-y-1/2 left-0 p-1">
+              <div class="animate-breathe">{% render 'icon-pre-arrow', class: 'w-8 md:w-10' %}</div>
+              <span class="sr-only">Previous slide</span>
+            </button>
+            <button
+              @click="next"
+              :aria-disabled="atEnd"
+              :tabindex="atEnd ? -1 : 0"
+              :class="!atEnd ? 'opacity-50' : 'opacity-0 cursor-not-allowed'"
+              class="h-full absolute top-1/2 transform -translate-y-1/2 right-0 p-1">
+              <div class="animate-breathe">{% render 'icon-next-arrow', class: 'w-8 md:w-10' %}</div>
+              <span class="sr-only">Next slide</span>
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-row justify-between md:justify-center md:mt-3 mt-2 w-full" x-ref="thumbnails">
+          {% for media in section.settings.product.images %}
+            <img
+              src="{{ media | img_url }}"
+              class="{% if forloop.index0 != 0 %}md:ml-3{% endif %}
+            {% if forloop.index0 == 0 %}border-2{% endif %}
+            border-blue-400 w-20"
+            x-on:mouseover="jumpTo({{ forloop.index0 }})">
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-span-1 top-8 sticky px-10 md:px-0 self-center">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'content_text' %}
+            <div class="w-auto {{ block.settings.text_align }} md:{{ block.settings.text_size }} md:mb-{{ block.settings.margin_bottom }} md:mt-{{ block.settings.margin_top }} {{ block.settings.text_size_mobile }} mb-{{ block.settings.margin_bottom_mobile }} mt-{{ block.settings.margin_top_mobile }} md:{{ block.settings.line_height }} {{ block.settings.line_height_mobile }}" style="color: {{ block.settings.text_color }};">
+              {{ block.settings.text }}
+            </div>
+          {% endcase %}
+        {% endfor %}
+        {% if section.settings.btn_exist %}
+          {% render 'buy-button-amz', amazon_link: section.settings.btn_link btn_bg_color: section.settings.btn_bg_color btn_color: section.settings.btn_color %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "中转产品块",
+    "tag": "section",
+    "class": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "产品"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "背景颜色"
+      },
+      {
+        "type": "checkbox",
+        "id": "btn_exist",
+        "label": "是否显示按钮",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "btn_link",
+        "label": "按钮链接"
+      }, {
+        "type": "color",
+        "id": "btn_bg_color",
+        "label": "按钮颜色"
+      }, {
+        "type": "color",
+        "id": "btn_color",
+        "label": "按钮字体颜色"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "content_text",
+        "name": "文本",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "文本"
+          },
+          {
+            "type": "select",
+            "id": "text_align",
+            "label": "文本对齐",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "左对齐"
+              }, {
+                "value": "text-center",
+                "label": "居中"
+              }, {
+                "value": "text-right",
+                "label": "右对齐"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "text_color",
+            "label": "文本颜色"
+          },
+          {
+            "type": "select",
+            "id": "text_size",
+            "label": "文本大小",
+            "options": [
+              {
+                "value": "text-7xl",
+                "label": "超大"
+              },
+              {
+                "value": "text-5xl",
+                "label": "大"
+              },
+              {
+                "value": "text-3xl",
+                "label": "中"
+              },
+              {
+                "value": "text-2xl",
+                "label": "小"
+              }, {
+                "value": "text-xl",
+                "label": "较小"
+              }, {
+                "value": "text-base",
+                "label": "超小"
+              }
+            ]
+          }, {
+            "type": "select",
+            "id": "text_size_mobile",
+            "label": "移动端文本大小",
+            "options": [
+              {
+                "value": "text-3xl",
+                "label": "超大"
+              },
+              {
+                "value": "text-2xl",
+                "label": "大"
+              },
+              {
+                "value": "text-xl",
+                "label": "中"
+              },
+              {
+                "value": "text-lg",
+                "label": "小"
+              }, {
+                "value": "text-base",
+                "label": "较小"
+              }, {
+                "value": "text-sm",
+                "label": "超小"
+              }
+            ]
+          }, {
+            "type": "number",
+            "id": "margin_top",
+            "label": "上边距",
+            "default": 12
+          }, {
+            "type": "range",
+            "id": "margin_top_mobile",
+            "label": "移动端上边距",
+            "min": 0,
+            "max": 16,
+            "default": 2
+          }, {
+            "type": "range",
+            "id": "margin_bottom",
+            "label": "下边距",
+            "min": 0,
+            "max": 16,
+            "default": 4
+          }, {
+            "type": "range",
+            "id": "margin_bottom_mobile",
+            "label": "移动端下边距",
+            "min": 0,
+            "max": 16,
+            "default": 2
+          }, {
+            "type": "select",
+            "id": "line_height",
+            "label": "行高",
+            "default": "leading-normal",
+            "options": [
+              {
+                "value": "leading-none",
+                "label": "1"
+              },
+              {
+                "value": "leading-tight",
+                "label": "2"
+              },
+              {
+                "value": "leading-snug",
+                "label": "3"
+              },
+              {
+                "value": "leading-normal",
+                "label": "4"
+              }, {
+                "value": "leading-relaxed",
+                "label": "5"
+              }, {
+                "value": "leading-loose",
+                "label": "6"
+              }
+            ]
+          }, {
+            "type": "select",
+            "id": "line_height_mobile",
+            "label": "移动端行高",
+            "default": "leading-normal",
+            "options": [
+              {
+                "value": "leading-none",
+                "label": "1"
+              },
+              {
+                "value": "leading-tight",
+                "label": "2"
+              },
+              {
+                "value": "leading-snug",
+                "label": "3"
+              },
+              {
+                "value": "leading-normal",
+                "label": "4"
+              }, {
+                "value": "leading-relaxed",
+                "label": "5"
+              }, {
+                "value": "leading-loose",
+                "label": "6"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "中转产品块"
+      }
+    ]
+  }
+{% endschema %}

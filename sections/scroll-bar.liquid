@@ -1,0 +1,47 @@
+<div class="py-3 overflow-hidden whitespace-nowrap" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }}">
+  <div class="inline-block animate-move text-right md:text-xl text-base" style="--animate-move-speed: 60s">
+    {% for i in (1..9) %}
+      {% for block in section.blocks %}
+        {{ block.settings.text | strip_html }}
+        &emsp;&emsp;
+        <b>·</b>
+        &emsp;&emsp;
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "滚动条",
+    "enabled_on": {
+      "groups": ["header"]
+    },
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#fff"
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": "Color",
+        "default": "#000"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "文本",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "文本"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

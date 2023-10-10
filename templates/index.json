@@ -1,5 +1,120 @@
 {
   "sections": {
+    "48ed0249-cb40-4bd7-90ca-c32cbcadba34": {
+      "type": "banner-block",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/HT202_banner_1.jpg",
+        "image_width": "max-w-5xl",
+        "image_width_mobile": "w-11\/12",
+        "margin_top": 12,
+        "margin_top_mobile": 4,
+        "margin_bottom": 4,
+        "margin_bottom_mobile": 2
+      }
+    },
+    "6d94e7bd-df84-4fc9-a787-f25e76327099": {
+      "type": "slogan",
+      "blocks": {
+        "16a0b45a-34e2-4cc0-9f1f-111306e07ee2": {
+          "type": "text",
+          "settings": {
+            "text": "<h2><strong>In the intricate tapestry of tonsil stones, a nuanced solution is paramount.<\/strong><\/h2>",
+            "font_size": "text-4xl",
+            "font_size_mobile": "text-2xl",
+            "font_color": "#696969",
+            "width": "max-w-4xl",
+            "width_mobile": "w-11\/12"
+          }
+        }
+      },
+      "block_order": [
+        "16a0b45a-34e2-4cc0-9f1f-111306e07ee2"
+      ],
+      "settings": {
+        "margin_top": 12,
+        "margin_top_mobile": 3,
+        "margin_bottom": 2,
+        "margin_bottom_mobile": 3,
+        "block_margin": 2
+      }
+    },
+    "ea65c979-d50e-4dd3-af88-eb2690c25e87": {
+      "type": "banner-block",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/HT202_banner_2.jpg",
+        "image_width": "max-w-4xl",
+        "image_width_mobile": "w-11\/12",
+        "margin_top": 10,
+        "margin_top_mobile": 2,
+        "margin_bottom": 4,
+        "margin_bottom_mobile": 1
+      }
+    },
+    "1a2ce757-476f-4808-b411-010fe1b90ccf": {
+      "type": "image-set-with-text",
+      "blocks": {
+        "template--14863689220132__1a2ce757-476f-4808-b411-010fe1b90ccf-photo_slider-1": {
+          "type": "photo_slider",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/HT202_detail_1.jpg"
+          }
+        },
+        "0e9f93f0-5286-4bdc-96c9-ca02bef37fbc": {
+          "type": "photo_slider",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/HT202_detail_2.jpg"
+          }
+        },
+        "ae7a97a9-dcdc-489e-bb0a-562594480aab": {
+          "type": "photo_slider",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/HT202_detail_3.jpg"
+          }
+        },
+        "template--14863689220132__1a2ce757-476f-4808-b411-010fe1b90ccf-content_text-1": {
+          "type": "content_text",
+          "settings": {
+            "text": "<p><strong>Are you experiencing any of these symptoms?<\/strong><\/p>",
+            "text_align": "text-left",
+            "text_color": "#000000",
+            "text_size": "text-3xl",
+            "text_size_mobile": "text-2xl",
+            "margin_top": 1,
+            "margin_top_mobile": 1,
+            "margin_bottom": 5,
+            "margin_bottom_mobile": 2,
+            "line_height": "leading-normal",
+            "line_height_mobile": "leading-normal"
+          }
+        },
+        "287ec6b4-6f76-47ae-a444-8dfd2147b8e9": {
+          "type": "content_text",
+          "settings": {
+            "text": "<p>✓ Bad Breath: Persistent, unpleasant odor from the mouth.<\/p><p>✓ Sore Throat: Recurrent discomfort or irritation.<\/p><p>✓ Difficulty Swallowing: A sensation of something stuck in the throat.<\/p><p>✓ Ear Pain: Discomfort or aching radiating to the ears.<\/p><p>✓ Visible White or Yellowish Bumps: Small, hardened masses on the tonsils.<\/p>",
+            "text_align": "text-left",
+            "text_color": "",
+            "text_size": "text-xl",
+            "text_size_mobile": "text-lg",
+            "margin_top": 5,
+            "margin_top_mobile": 1,
+            "margin_bottom": 5,
+            "margin_bottom_mobile": 1,
+            "line_height": "leading-loose",
+            "line_height_mobile": "leading-normal"
+          }
+        }
+      },
+      "block_order": [
+        "template--14863689220132__1a2ce757-476f-4808-b411-010fe1b90ccf-photo_slider-1",
+        "0e9f93f0-5286-4bdc-96c9-ca02bef37fbc",
+        "ae7a97a9-dcdc-489e-bb0a-562594480aab",
+        "template--14863689220132__1a2ce757-476f-4808-b411-010fe1b90ccf-content_text-1",
+        "287ec6b4-6f76-47ae-a444-8dfd2147b8e9"
+      ],
+      "settings": {
+        "bg_color": "#f3f3f3"
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -21,7 +136,7 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
+            "button_link_1": "shopify:\/\/collections\/all",
             "button_style_secondary_1": true,
             "button_label_2": "",
             "button_link_2": "",
@@ -34,6 +149,7 @@
         "text",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "image_overlay_opacity": 40,
         "image_height": "large",
@@ -41,6 +157,7 @@
         "show_text_box": false,
         "desktop_content_alignment": "center",
         "color_scheme": "inverse",
+        "image_behavior": "none",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
         "show_text_below": false
@@ -67,7 +184,10 @@
         "heading",
         "text"
       ],
+      "disabled": true,
       "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "background-1",
         "full_width": true,
         "padding_top": 40,
@@ -76,20 +196,29 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured products",
         "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "background-1",
+        "full_width": false,
         "show_view_all": false,
-        "swipe_on_mobile": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-1",
         "image_ratio": "adapt",
+        "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
+        "enable_quick_add": false,
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 28,
         "padding_bottom": 36
       }
@@ -122,11 +251,13 @@
         "product",
         "collection-1"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Multimedia collage",
         "heading_size": "h2",
         "desktop_layout": "left",
         "mobile_layout": "collage",
+        "card_styles": "product-card-wrapper",
         "color_scheme": "background-1",
         "padding_top": 36,
         "padding_bottom": 36
@@ -134,10 +265,12 @@
     },
     "video": {
       "type": "video",
+      "disabled": true,
       "settings": {
         "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "heading_size": "h1",
+        "enable_video_looping": false,
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
         "description": "",
         "full_width": false,
         "color_scheme": "background-1",
@@ -181,6 +314,7 @@
         "column2",
         "column3"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -191,20 +325,211 @@
         "background_style": "none",
         "button_label": "",
         "button_link": "",
-        "swipe_on_mobile": false,
         "color_scheme": "background-1",
         "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "1696647798e5bd6a8c": {
+      "type": "apps",
+      "blocks": {
+        "492c0593-3b57-4cef-8ad6-961ccfeaf7fa": {
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1800
+          }
+        }
+      },
+      "block_order": [
+        "492c0593-3b57-4cef-8ad6-961ccfeaf7fa"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "af562ba9-a66b-45d0-8dc4-6d80c7efc7eb": {
+      "type": "transit-product",
+      "blocks": {
+        "6510ec6b-5b82-4046-ae34-9b0f07362f05": {
+          "type": "content_text",
+          "settings": {
+            "text": "<p>EVNRH<\/p>",
+            "text_align": "text-left",
+            "text_color": "#808080",
+            "text_size": "text-base",
+            "text_size_mobile": "text-sm",
+            "margin_top": 0,
+            "margin_top_mobile": 2,
+            "margin_bottom": 0,
+            "margin_bottom_mobile": 0,
+            "line_height": "leading-none",
+            "line_height_mobile": "leading-none"
+          }
+        },
+        "1d2dafc7-f709-4f03-bd25-8a6d044d3574": {
+          "type": "content_text",
+          "settings": {
+            "text": "<h1><strong>Tonsil Stone Remover Vacuum Tonsil Stone Removal Kit <\/strong><\/h1>",
+            "text_align": "text-left",
+            "text_color": "",
+            "text_size": "text-3xl",
+            "text_size_mobile": "text-2xl",
+            "margin_top": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom": 8,
+            "margin_bottom_mobile": 2,
+            "line_height": "leading-normal",
+            "line_height_mobile": "leading-snug"
+          }
+        },
+        "bd825a66-f0aa-4c9f-a256-83a48172a2b3": {
+          "type": "content_text",
+          "settings": {
+            "text": "<p>1 x PVC suction ball<\/p><p>2 x suction probe in different shapes<\/p><p>3 x unique squeeze tools<\/p><p>1 x tongue plate<\/p><p>1 x 5X magnifying mirror<\/p><p>1 x dental light<\/p>",
+            "text_align": "text-left",
+            "text_color": "#696969",
+            "text_size": "text-xl",
+            "text_size_mobile": "text-lg",
+            "margin_top": 4,
+            "margin_top_mobile": 2,
+            "margin_bottom": 8,
+            "margin_bottom_mobile": 2,
+            "line_height": "leading-relaxed",
+            "line_height_mobile": "leading-snug"
+          }
+        },
+        "d571e20f-7d3b-40a5-97f6-574d47088a99": {
+          "type": "content_text",
+          "settings": {
+            "text": "<p>$19.99 USD<\/p>",
+            "text_align": "text-left",
+            "text_color": "",
+            "text_size": "text-2xl",
+            "text_size_mobile": "text-xl",
+            "margin_top": 4,
+            "margin_top_mobile": 2,
+            "margin_bottom": 7,
+            "margin_bottom_mobile": 2,
+            "line_height": "leading-normal",
+            "line_height_mobile": "leading-relaxed"
+          }
+        },
+        "02b25958-2a2c-4623-9fd9-d495a833d774": {
+          "type": "content_text",
+          "settings": {
+            "text": "<p>(Only 3 items left)<\/p>",
+            "text_align": "text-left",
+            "text_color": "",
+            "text_size": "text-xl",
+            "text_size_mobile": "text-base",
+            "margin_top": 4,
+            "margin_top_mobile": 2,
+            "margin_bottom": 1,
+            "margin_bottom_mobile": 2,
+            "line_height": "leading-normal",
+            "line_height_mobile": "leading-tight"
+          }
+        }
+      },
+      "block_order": [
+        "6510ec6b-5b82-4046-ae34-9b0f07362f05",
+        "1d2dafc7-f709-4f03-bd25-8a6d044d3574",
+        "bd825a66-f0aa-4c9f-a256-83a48172a2b3",
+        "d571e20f-7d3b-40a5-97f6-574d47088a99",
+        "02b25958-2a2c-4623-9fd9-d495a833d774"
+      ],
+      "settings": {
+        "product": "tonsil-stone-remover-vacuum-tonsil-stone-removal-kit-tonsil-stone-cupping-tool",
+        "bg_color": "#f3f3f3",
+        "btn_exist": true,
+        "btn_link": "https:\/\/www.amazon.com",
+        "btn_bg_color": "#4682b4",
+        "btn_color": "#ffffff"
+      }
+    },
+    "0786df7f-cb9c-4af1-bd67-b70bbefb669e": {
+      "type": "multicol-card",
+      "blocks": {
+        "template--14863689220132__0786df7f-cb9c-4af1-bd67-b70bbefb669e-card-1": {
+          "type": "card",
+          "settings": {
+            "card_text": "<p>Enjoy up to 60 days of worry-free after-sales service.<\/p>"
+          }
+        },
+        "template--14863689220132__0786df7f-cb9c-4af1-bd67-b70bbefb669e-card-2": {
+          "type": "card",
+          "settings": {
+            "card_text": "<p>Your satisfaction is our priority. If you're not satisfied, we offer a 100% refund or product replenishment.<\/p>"
+          }
+        },
+        "template--14863689220132__0786df7f-cb9c-4af1-bd67-b70bbefb669e-card-3": {
+          "type": "card",
+          "settings": {
+            "card_text": "<p>Please note, as our oral care product cannot be resold, we do not accept returns or exchanges.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14863689220132__0786df7f-cb9c-4af1-bd67-b70bbefb669e-card-1",
+        "template--14863689220132__0786df7f-cb9c-4af1-bd67-b70bbefb669e-card-2",
+        "template--14863689220132__0786df7f-cb9c-4af1-bd67-b70bbefb669e-card-3"
+      ],
+      "settings": {
+        "title": "<p>Our after-sales policy is simple and customer-focused<\/p>",
+        "font_color": "#696969",
+        "font_size": "text-4xl",
+        "font_size_mobile": "text-2xl",
+        "margin_top": 6,
+        "margin_top_mobile": 2,
+        "margin_bottom": 5,
+        "margin_bottom_mobile": 0,
+        "title_width": "max-w-5xl",
+        "title_width_mobile": "w-4\/5"
+      }
+    },
+    "b8169c43-8d14-40ca-8bc8-ccc727a78410": {
+      "type": "slogan",
+      "blocks": {
+        "65070165-1f85-425d-8106-f51bdd8849cd": {
+          "type": "text",
+          "settings": {
+            "text": "<h2><strong>Your happiness and oral health matter to us.<\/strong><\/h2>",
+            "font_size": "text-4xl",
+            "font_size_mobile": "text-2xl",
+            "font_color": "#696969",
+            "width": "max-w-5xl",
+            "width_mobile": "w-4\/5"
+          }
+        }
+      },
+      "block_order": [
+        "65070165-1f85-425d-8106-f51bdd8849cd"
+      ],
+      "settings": {
+        "margin_top": 10,
+        "margin_top_mobile": 2,
+        "margin_bottom": 4,
+        "margin_bottom_mobile": 2,
+        "block_margin": 2
       }
     }
   },
   "order": [
+    "48ed0249-cb40-4bd7-90ca-c32cbcadba34",
+    "6d94e7bd-df84-4fc9-a787-f25e76327099",
+    "ea65c979-d50e-4dd3-af88-eb2690c25e87",
+    "1a2ce757-476f-4808-b411-010fe1b90ccf",
     "image_banner",
     "rich_text",
     "featured_collection",
     "collage",
     "video",
-    "multicolumn"
+    "multicolumn",
+    "1696647798e5bd6a8c",
+    "af562ba9-a66b-45d0-8dc4-6d80c7efc7eb",
+    "0786df7f-cb9c-4af1-bd67-b70bbefb669e",
+    "b8169c43-8d14-40ca-8bc8-ccc727a78410"
   ]
 }

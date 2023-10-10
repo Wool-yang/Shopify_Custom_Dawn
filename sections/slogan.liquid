@@ -1,0 +1,154 @@
+<div class="md:mt-{{ section.settings.margin_top }} mt-{{ section.settings.margin_top_mobile }} md:mb-{{ section.settings.margin_bottom }} mb-{{ section.settings.margin_bottom_mobile }} w-full">
+  {% for block in section.blocks %}
+    <div
+      class="flex justify-center items-center">
+      <div class="md:{{ block.settings.width }} {{ block.settings.width_mobile }} {% if forloop.index != 1 %}mt-{{ section.settings.block_margin }}{% endif %} text-center max-w-4xl font-bold md:{{ block.settings.font_size }} {{ block.settings.font_size_mobile }}" 
+      style="color: {{ block.settings.font_color }}; ">
+        {{ block.settings.text }}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+
+
+</script>
+
+{% schema %}
+  {
+    "name": "标语",
+    "tag": "section",
+    "class": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "range",
+        "id": "margin_top",
+        "label": "上边距",
+        "min": 0,
+        "max": 16,
+        "default": 4
+      }, {
+        "type": "range",
+        "id": "margin_top_mobile",
+        "label": "移动端上边距",
+        "min": 0,
+        "max": 16,
+        "default": 2
+      }, {
+        "type": "range",
+        "id": "margin_bottom",
+        "label": "下边距",
+        "min": 0,
+        "max": 16,
+        "default": 4
+      }, {
+        "type": "range",
+        "id": "margin_bottom_mobile",
+        "label": "移动端下边距",
+        "min": 0,
+        "max": 16,
+        "default": 2
+      }, {
+        "type": "range",
+        "id": "block_margin",
+        "label": "块间距",
+        "min": 0,
+        "max": 16,
+        "default": 2
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "文本",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "文本"
+          }, {
+            "type": "select",
+            "id": "font_size",
+            "label": "字体大小",
+            "default": "text-3xl",
+            "options": [
+              {
+                "value": "text-2xl",
+                "label": "小"
+              }, {
+                "value": "text-3xl",
+                "label": "中"
+              }, {
+                "value": "text-4xl",
+                "label": "大"
+              }
+            ]
+          }, {
+            "type": "select",
+            "id": "font_size_mobile",
+            "label": "移动端字体大小",
+            "default": "text-xl",
+            "options": [
+              {
+                "value": "text-lg",
+                "label": "小"
+              }, {
+                "value": "text-xl",
+                "label": "中"
+              }, {
+                "value": "text-2xl",
+                "label": "大"
+              }
+            ]
+          }, {
+            "type": "color",
+            "id": "font_color",
+            "label": "字体颜色",
+            "default": "#000000"
+          }, {
+            "type": "select",
+            "id": "width",
+            "label": "桌面端最大宽度",
+            "default": "max-w-5xl",
+            "options": [
+              {
+                "value": "max-w-4xl",
+                "label": "max-w-4xl"
+              }, {
+                "value": "max-w-5xl",
+                "label": "max-w-5xl"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "width_mobile",
+            "label": "移动端宽度",
+            "default": "w-4/5",
+            "options": [
+              {
+                "value": "w-3/4",
+                "label": "75"
+              }, {
+                "value": "w-4/5",
+                "label": "80%"
+              }, {
+                "value": "w-11/12",
+                "label": "91.6%"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "标语"
+      }
+    ]
+  }
+{% endschema %}

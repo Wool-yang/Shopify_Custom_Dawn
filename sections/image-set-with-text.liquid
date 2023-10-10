@@ -1,0 +1,273 @@
+<section class="flex justify-center mt-6" style="background-color: {{ section.settings.bg_color }};">
+  <div class="max-w-6xl grid grid-cols-1 md:grid-cols-3 my-6 md:gap-7 gap-3">
+    <div class="md:col-span-2 relative flex justify-center items-center" x-data="Slider(true, 9000, false)">
+      <div class="md:max-w-2xl w-11/12">
+        <div
+          class="flex overflow-x-scroll rounded-2xl overflow-hidden snap-x snap-mandatory scrollbar-hidden"
+          x-ref="slider"
+          @keydown.right="next"
+          @keydown.left="prev"
+          tabindex="0">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'photo_slider' %}
+              <div x-bind="disableNextAndPreviousButtons" class="w-full flex-shrink-0 snap-start">
+                {% render 'media', media: block.settings.image %}
+              </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+        <button
+          @click="prev"
+          :aria-disabled="atBeginning"
+          :tabindex="atBeginning ? -1 : 0"
+          :class="!atBeginning ? 'opacity-50' : 'opacity-0 cursor-not-allowed'"
+          class="h-full absolute top-1/2 transform -translate-y-1/2 left-0 p-1">
+          <div class="animate-breathe">{% render 'icon-pre-circle', class: 'w-10 md:w-14' %}</div>
+          <span class="sr-only">Previous slide</span>
+        </button>
+        <button
+          @click="next"
+          :aria-disabled="atEnd"
+          :tabindex="atEnd ? -1 : 0"
+          :class="!atEnd ? 'opacity-50' : 'opacity-0 cursor-not-allowed'"
+          class="h-full absolute top-1/2 transform -translate-y-1/2 right-0 p-1">
+          <div class="animate-breathe">{% render 'icon-next-circle', class: 'w-10 md:w-14' %}</div>
+          <span class="sr-only">Next slide</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="col-span-1 top-8 sticky self-center px-10 md:px-0">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'content_text' %}
+          <div class="{{ block.settings.text_align }} md:{{ block.settings.text_size }} md:mb-{{ block.settings.margin_bottom }} md:mt-{{ block.settings.margin_top }} md:{{ block.settings.line_height }} {{ block.settings.line_height_mobile }} {{ block.settings.text_size_mobile }} mb-{{ block.settings.margin_bottom_mobile }} mt-{{ block.settings.margin_top_mobile }}" style="color: {{ block.settings.text_color }};">
+            {{ block.settings.text }}
+          </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+  {
+    "name": "slider和文本",
+    "tag": "section",
+    "class": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "背景颜色"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "photo_slider",
+        "name": "图片",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "图片"
+          }
+        ]
+      }, {
+        "type": "content_text",
+        "name": "文本",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "文本"
+          },
+          {
+            "type": "select",
+            "id": "text_align",
+            "label": "文本对齐",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "左对齐"
+              }, {
+                "value": "text-center",
+                "label": "居中"
+              }, {
+                "value": "text-right",
+                "label": "右对齐"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "text_color",
+            "label": "文本颜色"
+          },
+          {
+            "type": "select",
+            "id": "text_size",
+            "label": "文本大小",
+            "options": [
+              {
+                "value": "text-7xl",
+                "label": "超大"
+              },
+              {
+                "value": "text-5xl",
+                "label": "大"
+              },
+              {
+                "value": "text-3xl",
+                "label": "中"
+              },
+              {
+                "value": "text-2xl",
+                "label": "小"
+              }, {
+                "value": "text-xl",
+                "label": "较小"
+              }, {
+                "value": "text-base",
+                "label": "超小"
+              }
+            ]
+          }, {
+            "type": "select",
+            "id": "text_size_mobile",
+            "label": "移动端文本大小",
+            "options": [
+              {
+                "value": "text-3xl",
+                "label": "超大"
+              },
+              {
+                "value": "text-2xl",
+                "label": "大"
+              },
+              {
+                "value": "text-xl",
+                "label": "中"
+              },
+              {
+                "value": "text-lg",
+                "label": "小"
+              }, {
+                "value": "text-base",
+                "label": "较小"
+              }, {
+                "value": "text-sm",
+                "label": "超小"
+              }
+            ]
+          }, {
+            "type": "range",
+            "id": "margin_top",
+            "label": "上边距",
+            "default": 5,
+            "min": 0,
+            "max": 16
+          }, {
+            "type": "range",
+            "id": "margin_top_mobile",
+            "label": "移动端上边距",
+            "min": 0,
+            "max": 16,
+            "default": 2
+          }, {
+            "type": "range",
+            "id": "margin_bottom",
+            "label": "下边距",
+            "default": 8,
+            "min": 0,
+            "max": 16
+          }, {
+            "type": "range",
+            "id": "margin_bottom_mobile",
+            "label": "移动端下边距",
+            "min": 0,
+            "max": 16,
+            "default": 2
+          }, {
+            "type": "select",
+            "id": "line_height",
+            "label": "行高",
+            "default": "leading-normal",
+            "options": [
+              {
+                "value": "leading-none",
+                "label": "1"
+              },
+              {
+                "value": "leading-tight",
+                "label": "2"
+              },
+              {
+                "value": "leading-snug",
+                "label": "3"
+              },
+              {
+                "value": "leading-normal",
+                "label": "4"
+              }, {
+                "value": "leading-relaxed",
+                "label": "5"
+              }, {
+                "value": "leading-loose",
+                "label": "6"
+              }
+            ]
+          }, {
+            "type": "select",
+            "id": "line_height_mobile",
+            "label": "移动端行高",
+            "default": "leading-normal",
+            "options": [
+              {
+                "value": "leading-none",
+                "label": "1"
+              },
+              {
+                "value": "leading-tight",
+                "label": "2"
+              },
+              {
+                "value": "leading-snug",
+                "label": "3"
+              },
+              {
+                "value": "leading-normal",
+                "label": "4"
+              }, {
+                "value": "leading-relaxed",
+                "label": "5"
+              }, {
+                "value": "leading-loose",
+                "label": "6"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "slider和文本",
+        "blocks": [
+          {
+            "type": "photo_slider"
+          }, {
+            "type": "content_text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

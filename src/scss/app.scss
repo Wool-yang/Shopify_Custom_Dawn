@@ -2,21 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.header{
-    display: grid;
-    grid-template-areas: "header-logo header-menu header-icons";
-    grid-template-columns: 1fr 2fr 1fr;
-    .header__logo{
-        grid-area: header-logo;
-    }
-    .heade__menu{
-        grid-area: header-menu;
-    }
-    .header__icons{
-        grid-area: header-icons;
-    }
+// Helpers
+.page-width{
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
 
-    @media (max-width: 768px) {
-        grid-template-areas: "header-menu header-logo header-icons";
-    }
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hidden {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

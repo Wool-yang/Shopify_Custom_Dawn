@@ -1,16 +1,49 @@
-<header class="header border-y items-center">
-  <div class="header__logo">
-    {% if settings.logo != blank %}
-      <a href="/" class="block" style="max-width: {{ settings.logo_with }}">
-        <img src="{{ settings.logo | img_url: 'master' }}" alt="{{ shop.name }}">
-      </a>
-    {% else %}
-      <a href="/"> {{ shop.name }} </a>
-    {% endif %}
-  </div>
-  <div class="header__menu flex"></div>
-  <div class="header__icons">icons</div>
-</header>
+{%- if section.settings.header_type == 'just-brand' -%}
+  <header class="border-y text-center py-4">
+    <a href="/" class="font-semibold text-4xl md:text-5xl"> {{ shop.name }} </a>
+  </header>
+{% else %}
+  <header class="border-y items-center grid grid-cols-4">
+    <div class="header__logo flex justify-center md:justify-start md:pl-5 col-span-2 md:col-span-1 md:order-1 order-2">
+      {% if settings.logo != blank %}
+        <a href="/" class="block" style="max-width: {{ settings.logo_with }}">
+          <img class="rounded-xl" src="{{ settings.logo | img_url: 'master' }}" alt="{{ shop.name }}">
+        </a>
+      {% else %}
+        <a href="/"> {{ shop.name }} </a>
+      {% endif %}
+    </div>
+    <nav class="header__menu flex col-span-1 md:col-span-2 md:order-2 order-1">
+      <button class="md:hidden" type="button">
+        {% render 'icon-menu', class: 'w-10' %}
+      </button>
+
+      <ul class="header__menu-nav hidden md:flex">
+        {% for link in section.settings.menu.links %}
+          {% if link.links != blank %}
+            <li class="nav__item group py-5 px-4 block relative">
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              <ul class="nav__item-submenu z-10 group-hover:block hidden absolute bg-white border py-3 px-4 min-w-[160px] top-16 left-1/2 transform -translate-x-1/2">
+                {% for sublink in linklists[link.handle].links %}
+                  <li>
+                    <a class="block py-1 hover:opacity-75 " href="{{ sublink.url }}">
+                      {{ sublink.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% else %}
+            <li>
+              <a class="nav__item py-5 px-4 block" href="{{ link.url }}"> {{ link.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+    <div class="header__icons flex col-span-1 order-last justify-end space-x-5">icons</div>
+  </header>
+{%- endif -%}
 
 <script type="application/ld+json">
   {
@@ -55,9 +88,20 @@
 {% schema %}
 {
   "name": "t:sections.header.name",
-  "class": "section-header",
   "max_blocks": 3,
   "settings": [
+    {
+      "type": "select",
+      "id": "header_type",
+      "options": [
+        {
+          "value": "just-brand",
+          "label": "仅品牌名"
+        }
+      ],
+      "default": "just-brand",
+      "label": "header类型"
+    },
     {
       "type": "select",
       "id": "logo_position",

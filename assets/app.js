@@ -2,6 +2,77 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@alpinejs/intersect/dist/module.esm.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@alpinejs/intersect/dist/module.esm.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ module_default)
+/* harmony export */ });
+// packages/intersect/src/index.js
+function src_default(Alpine) {
+  Alpine.directive("intersect", (el, { value, expression, modifiers }, { evaluateLater, cleanup }) => {
+    let evaluate = evaluateLater(expression);
+    let options = {
+      rootMargin: getRootMargin(modifiers),
+      threshold: getThreshold(modifiers)
+    };
+    let observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting === (value === "leave"))
+          return;
+        evaluate();
+        modifiers.includes("once") && observer.disconnect();
+      });
+    }, options);
+    observer.observe(el);
+    cleanup(() => {
+      observer.disconnect();
+    });
+  });
+}
+function getThreshold(modifiers) {
+  if (modifiers.includes("full"))
+    return 0.99;
+  if (modifiers.includes("half"))
+    return 0.5;
+  if (!modifiers.includes("threshold"))
+    return 0;
+  let threshold = modifiers[modifiers.indexOf("threshold") + 1];
+  if (threshold === "100")
+    return 1;
+  if (threshold === "0")
+    return 0;
+  return Number(`.${threshold}`);
+}
+function getLengthValue(rawValue) {
+  let match = rawValue.match(/^(-?[0-9]+)(px|%)?$/);
+  return match ? match[1] + (match[2] || "px") : void 0;
+}
+function getRootMargin(modifiers) {
+  const key = "margin";
+  const fallback = "0px 0px 0px 0px";
+  const index = modifiers.indexOf(key);
+  if (index === -1)
+    return fallback;
+  let values = [];
+  for (let i = 1; i < 5; i++) {
+    values.push(getLengthValue(modifiers[index + i] || ""));
+  }
+  values = values.filter((v) => v !== void 0);
+  return values.length ? values.join(" ").trim() : fallback;
+}
+
+// packages/intersect/builds/module.js
+var module_default = src_default;
+
+
+
+/***/ }),
+
 /***/ "./node_modules/alpinejs/dist/module.esm.js":
 /*!**************************************************!*\
   !*** ./node_modules/alpinejs/dist/module.esm.js ***!
@@ -3267,6 +3338,172 @@ var module_default = src_default;
 
 /***/ }),
 
+/***/ "./src/js/Slider.js":
+/*!**************************!*\
+  !*** ./src/js/Slider.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (enableAutoSlide, deltaTime, isButtonIn) {
+  return {
+    skip: 1,
+    atBeginning: false,
+    atEnd: false,
+    curIndex: 0,
+    numSlides: 0,
+    thumbnails: null,
+    next: function next() {
+      var _this = this;
+      if (this.curIndex >= this.numSlides - 1) {
+        return;
+      }
+      this.to(function (current, offset) {
+        return current + offset * _this.skip;
+      });
+    },
+    prev: function prev() {
+      var _this2 = this;
+      if (this.curIndex <= 0) {
+        return;
+      }
+      this.to(function (current, offset) {
+        return current - offset * _this2.skip;
+      });
+    },
+    to: function to(strategy) {
+      var slider = this.$refs.slider;
+      var current = slider.scrollLeft;
+      var offset = slider.firstElementChild.getBoundingClientRect().width;
+      slider.scrollTo({
+        left: strategy(current, offset),
+        behavior: 'smooth'
+      });
+      if (enableAutoSlide) {
+        this.stopAutoSlide();
+        this.startAutoSlide();
+      }
+    },
+    jumpTo: function jumpTo(index) {
+      this.to(function (current, offset) {
+        return index * offset;
+      });
+      this.curIndex = index;
+    },
+    mouseHoverThumbnails: function mouseHoverThumbnails(index) {
+      Array.from(this.thumbnails.children).forEach(function (child) {
+        child.classList.remove('border-2');
+      });
+      this.thumbnails.children[index].classList.add('border-2');
+    },
+    focusableWhenVisible: {
+      'x-intersect.full:enter': function xIntersectFullEnter() {
+        this.$el.removeAttribute('tabindex');
+      },
+      'x-intersect.full:leave': function xIntersectFullLeave() {
+        this.$el.setAttribute('tabindex', '-1');
+      }
+    },
+    disableNextAndPreviousButtons: {
+      'x-intersect:enter.threshold.50': function xIntersectEnterThreshold50() {
+        var slideEls = this.$el.parentElement.children;
+        var index = Array.from(slideEls).indexOf(this.$el);
+        this.curIndex = index;
+        if (this.thumbnails) this.mouseHoverThumbnails(this.curIndex);
+        if (index == 0) {
+          this.atBeginning = true;
+        } else if ((isButtonIn ? slideEls.length - 3 : slideEls.length - 1) == index) {
+          this.atEnd = true;
+        }
+        // // If this is the first slide.
+        // if (slideEls[0] === this.$el) {
+        //     this.atBeginning = true
+        //     // If this is the last slide.
+        // } else if (slideEls[isButtonIn ? slideEls.length - 3 : slideEls.length - 1] === this.$el) {
+        //     this.atEnd = true
+        // }
+      },
+      'x-intersect:leave.threshold.50': function xIntersectLeaveThreshold50() {
+        var slideEls = this.$el.parentElement.children;
+        var index = Array.from(slideEls).indexOf(this.$el);
+        if (index == 0) {
+          this.atBeginning = false;
+        } else if ((isButtonIn ? slideEls.length - 3 : slideEls.length - 1) == index) {
+          this.atEnd = false;
+        }
+        // // If this is the first slide.
+        // if (slideEls[0] === this.$el) {
+        //     this.atBeginning = false
+        //     // If this is the last slide.
+        // } else if (slideEls[isButtonIn ? slideEls.length - 3 : slideEls.length - 1] === this.$el) {
+        //     this.atEnd = false
+        // }
+      }
+    },
+
+    // 新增的自动切换slider功能
+    autoSlideInterval: null,
+    // 用于存储定时器引用
+    init: function init() {
+      var slider = this.$refs.slider;
+      this.thumbnails = this.$refs.thumbnails;
+      if (enableAutoSlide) {
+        this.startAutoSlide = this.startAutoSlide.bind(this); // 将上下文绑定到函数
+        this.stopAutoSlide = this.stopAutoSlide.bind(this); // 将上下文绑定到函数
+
+        this.startAutoSlide();
+        slider.addEventListener("touchstart", this.stopAutoSlide);
+        slider.addEventListener("touchend", this.startAutoSlide);
+      }
+      if (isButtonIn) this.numSlides = Array.from(slider.children).length - 2;else this.numSlides = Array.from(slider.children).length;
+    },
+    destroy: function destroy() {
+      this.stopAutoSlide();
+      var slider = this.$refs.slider;
+      if (this.autoSlideInterval) {
+        slider.removeEventListener("touchstart", this.stopAutoSlide);
+        slider.removeEventListener("touchend", this.startAutoSlide);
+      }
+    },
+    // 启用或禁用自动切换
+    toggleAutoSlide: function toggleAutoSlide() {
+      if (enableAutoSlide) {
+        this.startAutoSlide();
+      } else {
+        this.stopAutoSlide();
+      }
+    },
+    // 开始自动切换
+    startAutoSlide: function startAutoSlide() {
+      var _this3 = this;
+      if (!this.autoSlideInterval) {
+        this.autoSlideInterval = setInterval(function () {
+          if (_this3.atEnd) {
+            _this3.to(function (current, offset) {
+              return 0;
+            });
+            return;
+          } else {
+            _this3.next();
+          }
+        }, deltaTime); // 每2秒切换一次，可以根据需要调整间隔时间
+      }
+    },
+    // 停止自动切换
+    stopAutoSlide: function stopAutoSlide() {
+      if (this.autoSlideInterval) {
+        clearInterval(this.autoSlideInterval);
+        this.autoSlideInterval = null;
+      }
+    }
+  };
+});
+
+/***/ }),
+
 /***/ "./src/js/app.js":
 /*!***********************!*\
   !*** ./src/js/app.js ***!
@@ -3275,8 +3512,14 @@ var module_default = src_default;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Slider.js */ "./src/js/Slider.js");
+/* harmony import */ var _alpinejs_intersect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @alpinejs/intersect */ "./node_modules/@alpinejs/intersect/dist/module.esm.js");
 
+
+
+alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].plugin(_alpinejs_intersect__WEBPACK_IMPORTED_MODULE_2__["default"]);
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
+alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].data('Slider', _Slider_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
 /***/ }),
